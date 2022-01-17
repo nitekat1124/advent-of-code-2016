@@ -29,15 +29,14 @@ class Solution(SolutionBase):
 
     def part1(self, data):
         code = []
-        m = hashlib.md5()
         id = data[0]
         n = 0
 
         while len(code) < 8:
-            m = hashlib.md5(f"{id}{n}".encode())
-            if m.hexdigest()[:5] == "00000":
-                print(n, m.hexdigest())
-                code += [m.hexdigest()[5]]
+            m = hashlib.md5(f"{id}{n}".encode()).hexdigest()
+            if m[:5] == "00000":
+                print(n, m)
+                code += [m[5]]
             n += 1
 
         return "".join(code)
@@ -49,11 +48,11 @@ class Solution(SolutionBase):
         n = 0
 
         while code.count(" ") > 0:
-            m = hashlib.md5(f"{id}{n}".encode())
-            if m.hexdigest()[:5] == "00000":
-                print(n, m.hexdigest())
-                a = m.hexdigest()[5]
-                b = m.hexdigest()[6]
+            m = hashlib.md5(f"{id}{n}".encode()).hexdigest()
+            if m[:5] == "00000":
+                print(n, m)
+                a = m[5]
+                b = m[6]
                 if a.isdigit() and int(a) < 8 and code[int(a)] == " ":
                     code[int(a)] = b
             n += 1
